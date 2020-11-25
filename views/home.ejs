@@ -1,0 +1,32 @@
+<%- include("partials/header"); %>
+    <div class="content">
+        <h1>HOME</h1>
+        <p><%= startingContent %> </p>
+    
+        <%posts.forEach(function(post){%>
+        <h1><%=post.title %></h1>
+        <%if (post.content.length > 120) { %>
+        <p>
+            <%= post.content.substring(0, 120)  + " ..." %>
+            <a href="/post/<%= post.title %> ">Read more</a>
+        </p>
+    
+        <% } %>
+    
+        <%});%>
+    </div>
+    <div class="description">
+        <div class="avatar">
+            <img style="width: 200px;" src="/imgs/avatar.jpg" alt="photo avatar">
+        </div>
+        <h4 style="text-align: center;">Ngô Công Long</h4>
+        <div class="timeline">
+            <h3>Title</h3>
+            <%posts.forEach(function(post){%>
+                <a href="/post/<%= post.title %> "><h4><%=post.title %></h4></a>
+            
+                <%});%>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+<%- include("partials/footer"); %> 
