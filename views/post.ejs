@@ -1,4 +1,14 @@
-<%- include("partials/header"); %>
-    <h1><%= title %></h1>
-    <p><%= content %> </p>
-<%- include("partials/footer"); %> 
+
+<%- include("partials/header"); -%>
+
+<h1 style="padding-top: 30px;"><%= title %></h1>
+<% string = content; %> 
+<% arr = [] %>
+<% arr = string.split("\r\n") %>  
+<%arr.forEach(function(element){%>
+    <p><%= element %></p>
+<%});%>
+
+
+
+<%- include("partials/footer"); -%>

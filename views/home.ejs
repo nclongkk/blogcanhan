@@ -1,30 +1,36 @@
 <%- include("partials/header"); %>
     <div class="content">
         <h1>HOME</h1>
-        <p><%= startingContent %> </p>
-    
+        <p>Cuộc sống đôi khi rất vội vàng, nó càng thật sự đúng với những người trẻ. Mọi người thường bỏ quên những chuyện diễn
+            ra hằng ngày để dành thời gian quan tâm tới những thứ mờ ảo hào nhoáng hơn, thật đáng tiếc khi có những thứ mà ta không
+        để ý chẳng bao giờ quay trở lại </p>
+          <hr>
         <%posts.forEach(function(post){%>
-        <h1><%=post.title %></h1>
+
+        <h3><%=post.title %></h3>
         <%if (post.content.length > 120) { %>
         <p>
-            <%= post.content.substring(0, 120)  + " ..." %>
-            <a href="/post/<%= post.title %> ">Read more</a>
+            <%= post.content.substring(0, 400)  + " ..." %>
+            <a href="/posts/<%= post._id%> ">Read more</a>
         </p>
     
+        <% } else { %>
+            <p><%= post.content %></p>
         <% } %>
-    
+        <hr>
         <%});%>
     </div>
     <div class="description">
         <div class="avatar">
-            <img style="width: 200px;" src="/imgs/avatar.jpg" alt="photo avatar">
+            <img style="width: 200px;" src="../imgs/avatar.JPG" alt="photo avatar">
+            <h4 style="text-align: center; margin: 20px">Author: Công Long</h4>
+            <hr>
         </div>
-        <h4 style="text-align: center;">Ngô Công Long</h4>
         <div class="timeline">
             <h3>Title</h3>
             <%posts.forEach(function(post){%>
-                <a href="/post/<%= post.title %> "><h4><%=post.title %></h4></a>
-            
+                <a href="/posts/<%= post._id %> "><%=post.title %></a>
+                <br>
                 <%});%>
         </div>
     </div>
