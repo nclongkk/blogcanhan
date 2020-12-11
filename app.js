@@ -20,7 +20,8 @@ mongoose.connect("mongodb+srv://admin-nclongkk:nclongkk@cluster0.hlk8h.mongodb.n
 
 const postSchema = {
   title: String,
-  content: String
+  content: String,
+  date: String 
 };
 
 const Post = mongoose.model("Post", postSchema);
@@ -39,13 +40,27 @@ app.get("/compose", function(req, res){
   res.render("compose");
 });
 
+function AddZero(num) {
+  return (num >= 0 && num < 10) ? "0" + num : num + "";
+}
+
+function getDate() {
+  var now = new Date();
+  var strDateTime = [[AddZero(now.getDate()), 
+      AddZero(now.getMonth() + 1), 
+      now.getFullYear()].join("/"), 
+      [AddZero(now.getHours()), 
+      AddZero(now.getMinutes())].join(":"), 
+      now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+  return strDateTime;
+};
+
 app.post("/compose", function(req, res){
   const post = new Post({
     title: req.body.postTitle,
-    content: req.body.postBody
+    content: req.body.postBody,
+    date : getDate()
   });
-
-
   post.save(function(err){
     if (!err){
         res.redirect("/");
@@ -60,7 +75,8 @@ const requestedPostId = req.params.postId;
   Post.findOne({_id: requestedPostId}, function(err, post){
     res.render("post", {
       title: post.title,
-      content: post.content
+      content: post.content,
+      date: post.date
     });
   });
 
